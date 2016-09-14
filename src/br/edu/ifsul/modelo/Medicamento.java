@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Luis
  */
 @Entity
-@Table
+@Table(name = "medicamento")
 public class Medicamento implements Serializable{
     
     @Id

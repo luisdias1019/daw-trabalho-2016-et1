@@ -8,17 +8,48 @@ package br.edu.ifsul.modelo;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
  * @author Luis
  */
+@Entity
+@Table(name = "paciente")
 public class Paciente implements Serializable{
+    @Id
+    @SequenceGenerator(name = "seq_paciente", sequenceName = "seq_paciente_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_paciente", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    @NotNull(message = "O nome não pode ser nulo")
+    @Length(max = 50, message = "O nome não pode ter mais de {max} caracteres")
+    @NotBlank(message = "O nome não pode ser em branco")
+    @Column(name = "nome", length = 50, nullable = false)
     private String nome; 
     private Calendar nascimento;
-    private String telefone;
+    @NotNull(message = "O telefone não pode ser nulo")
+    @Length(max = 50, message = "O telefone não pode ter mais de {max} caracteres")
+    @NotBlank(message = "O telefone não pode ser em branco")
+    @Column(name = "telefone", length = 50, nullable = false)
+    private String telefone; 
+    @NotNull(message = "O sexo não pode ser nulo")
+    @Length(max = 1, message = "O sexo não pode ter mais de {max} caracter")
+    @NotBlank(message = "O sexo não pode ser em branco")
+    @Column(name = "sexo", length = 1, nullable = false)
     private String sexo;
+    @NotNull(message = "O histórico não pode ser nulo")
+    @Length(max = 50, message = "O histórico não pode ter mais de {max} caracteres")
+    @NotBlank(message = "O histórico não pode ser em branco")
+    @Column(name = "histórico", length = 50, nullable = false)
     private String historico;
     private Double peso;
     private Double altura;
